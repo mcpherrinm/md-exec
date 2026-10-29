@@ -8,6 +8,7 @@ program the document describes and writes it in Python. The result is cached
 by content hash, so re-running an unchanged file runs the same script.
 
 Environment:
+  MD_EXEC_DEBUG       if set, say on stderr when a document is being compiled
   MD_EXEC_MODEL       model passed to `claude --model` (part of the cache key)
   MD_EXEC_REGENERATE  if set, ignore any cached script and generate a new one
   MD_EXEC_SHOW        if set, print the generated script instead of running it
@@ -88,7 +89,8 @@ def generate(source, md_path, model, workdir):
     if model:
         cmd += ["--model", model]
 
-    print(f"md-exec: compiling {md_path} with claude...", file=sys.stderr)
+    if os.environ.get("MD_EXEC_DEBUG"):
+        print(f"md-exec: compiling {md_path} with claude...", file=sys.stderr)
     try:
         # Run from the cache dir so no project CLAUDE.md leaks into the prompt.
         proc = subprocess.run(

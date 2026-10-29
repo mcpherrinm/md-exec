@@ -11,7 +11,6 @@ command-line argument (default 100).
 ...
 $ chmod +x examples/fizzbuzz.md
 $ ./examples/fizzbuzz.md 5
-md-exec: compiling examples/fizzbuzz.md with claude...
 1
 2
 Fizz
@@ -54,6 +53,7 @@ Claude is only called once.
 
 | Variable               | Effect                                              |
 | ---------------------- | --------------------------------------------------- |
+| `MD_EXEC_DEBUG=1`      | Say on stderr when a document is being compiled.    |
 | `MD_EXEC_SHOW=1`       | Print the generated script instead of running it.   |
 | `MD_EXEC_REGENERATE=1` | Ignore the cache and generate a fresh script.       |
 | `MD_EXEC_MODEL`        | Model to pass to `claude --model`.                  |
